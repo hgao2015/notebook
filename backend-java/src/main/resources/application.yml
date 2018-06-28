@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+########################################################################
+# Endpoint
+########################################################################
+endpoint:
+  enabled: false
+  health:
+    enabled: true
+
+########################################################################
+# Database Settings
+########################################################################
+spring:
+  datasource:
+    url: jdbc:h2:mem:mynotesdb;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
+########################################################################
+#   H2 Console Settings - For development
+########################################################################
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+
+########################################################################
+#   JWT
+########################################################################
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 3600000
+
+UserController:
+  signin: Authenticates user and returns its JWT token.
+  search: Returns specific user by username
+  me: Returns current user's data
